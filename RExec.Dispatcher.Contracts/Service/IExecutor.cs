@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+
+namespace RExec.Dispatcher.Contracts.Service
+{
+    [ServiceContract(Name = "Executor", Namespace = "http://fugro.schemas/rexec/executor")]
+    public interface IExecutor
+    {
+        [OperationContract]
+        void Execute();
+    }
+}
