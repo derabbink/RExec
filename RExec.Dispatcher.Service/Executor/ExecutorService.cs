@@ -10,7 +10,7 @@ namespace RExec.Dispatcher.Service.Executor
     {
         public void Execute()
         {
-            throw new NotImplementedException();
+            //do nothing
         }
     }
 }

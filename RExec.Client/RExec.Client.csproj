@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{93D86A98-3513-409A-9380-C0F6730018E1}</ProjectGuid>
+    <ProjectGuid>{9E294343-F04F-4571-AFD3-9919942DC4B9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RExec.Host</RootNamespace>
-    <AssemblyName>RExec.Host</AssemblyName>
+    <RootNamespace>RExec.Client</RootNamespace>
+    <AssemblyName>RExec.Client</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,7 +35,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,17 +46,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RExec.Dispatcher.Contracts\RExec.Dispatcher.Contracts.csproj">
-      <Project>{7A372542-5227-4289-B0C2-8D7E9067C8FB}</Project>
-      <Name>RExec.Dispatcher.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RExec.Dispatcher.Service\RExec.Dispatcher.Service.csproj">
-      <Project>{92EF76E0-E8BF-4AB0-8B20-24E7FD06812C}</Project>
-      <Name>RExec.Dispatcher.Service</Name>
-    </ProjectReference>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\RExec.ClientProxy\RExec.ClientProxy.csproj">
+      <Project>{3c444689-2940-4974-ae85-70eb4ac2820d}</Project>
+      <Name>RExec.ClientProxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RExec.Dispatcher.Contracts\RExec.Dispatcher.Contracts.csproj">
+      <Project>{7a372542-5227-4289-b0c2-8d7e9067c8fb}</Project>
+      <Name>RExec.Dispatcher.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
