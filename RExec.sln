@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.ClientProxy", "RExec.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.Client", "RExec.Client\RExec.Client.csproj", "{9E294343-F04F-4571-AFD3-9919942DC4B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instructions", "Instructions\Instructions.csproj", "{854859BA-C271-46E1-84BE-5A12AFCDEC30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,16 @@ Global
 		{9E294343-F04F-4571-AFD3-9919942DC4B9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9E294343-F04F-4571-AFD3-9919942DC4B9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9E294343-F04F-4571-AFD3-9919942DC4B9}.Release|x86.ActiveCfg = Release|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{854859BA-C271-46E1-84BE-5A12AFCDEC30}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

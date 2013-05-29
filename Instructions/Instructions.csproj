@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{93D86A98-3513-409A-9380-C0F6730018E1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{854859BA-C271-46E1-84BE-5A12AFCDEC30}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RExec.Host</RootNamespace>
-    <AssemblyName>RExec.Host</AssemblyName>
+    <RootNamespace>Instructions</RootNamespace>
+    <AssemblyName>SampleInstructions</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,25 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Simple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Instructions\Instructions.csproj">
-      <Project>{854859ba-c271-46e1-84be-5a12afcdec30}</Project>
-      <Name>Instructions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RExec.Dispatcher.Contracts\RExec.Dispatcher.Contracts.csproj">
-      <Project>{7A372542-5227-4289-B0C2-8D7E9067C8FB}</Project>
-      <Name>RExec.Dispatcher.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RExec.Dispatcher.Service\RExec.Dispatcher.Service.csproj">
-      <Project>{92EF76E0-E8BF-4AB0-8B20-24E7FD06812C}</Project>
-      <Name>RExec.Dispatcher.Service</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

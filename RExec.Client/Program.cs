@@ -1,4 +1,5 @@
 ﻿using RExec.ClientProxy;
+using RExec.Dispatcher.Contracts.Data;
 using RExec.Dispatcher.Contracts.Service;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace RExec.Client
             {
                 Console.WriteLine("Testing IExecutor");
                 Console.WriteLine("  .Execute()");
-                client.Channel.Execute();
+                client.Channel.Execute(new Instruction() { AssemblyName = "SampleInstructions", FQTypeName = "Instructions.Simple", ActionName = "Do" });
                 
                 Console.WriteLine();
             }
