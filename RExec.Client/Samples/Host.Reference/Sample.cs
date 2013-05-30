@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RExec.Client.Samples
+namespace RExec.Client.Samples.Host.Reference
 {
-    internal class ExecuteInternal
+    /// <summary>
+    /// Demonstrates executing instructions located in one of the host's reference assemblies
+    /// </summary>
+    internal class Sample
     {
         internal static void Run(IExecutor executor)
         {
