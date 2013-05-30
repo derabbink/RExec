@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Instructions\RuntimeInfoGenerator.cs" />
-    <Compile Include="Instructions\Simple.cs" />
+    <Compile Include="InternalInstructions\InternalDependency\RuntimeInfoGenerator.cs" />
+    <Compile Include="InternalInstructions\InternalDependency\Simple.cs" />
+    <Compile Include="InternalInstructions\RuntimeInfoGenerator.cs" />
+    <Compile Include="InternalInstructions\Simple.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

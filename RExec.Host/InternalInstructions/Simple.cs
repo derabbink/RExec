@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Instructions.Reference.Host;
 
-namespace Instructions.Reference.Host
+namespace RExec.Host.InternalInstructions
 {
     public class Simple
     {
         public void Do()
         {
-            Console.WriteLine("Instructions.Reference.Host.Simple.Do() is now being executed");
+            Console.WriteLine("RExec.Host.InternalInstructions.Simple.Do() is now being executed");
         }
 
         /// <summary>
@@ -18,8 +19,8 @@ namespace Instructions.Reference.Host
         /// </summary>
         public void DoDependency()
         {
-            Console.WriteLine("Instructions.Reference.Host.Simple.DoDependency() is now being executed");
-            new Instructions.Reference.Host.InternalDependency.Simple().Do();
+            Console.WriteLine("RExec.Host.InternalInstructions.Simple.DoDependency() is now being executed");
+            new RExec.Host.InternalInstructions.InternalDependency.Simple().Do();
         }
 
         /// <summary>
@@ -27,8 +28,8 @@ namespace Instructions.Reference.Host
         /// </summary>
         public void DoReferenceDependency()
         {
-            Console.WriteLine("Instructions.Reference.Host.Simple.DoReferenceDependency() is now being executed");
-            new Instructions.Reference.Host.Dependency.Simple().Do();
+            Console.WriteLine("RExec.Host.InternalInstructions.Simple.DoReferenceDependency() is now being executed");
+            new Instructions.Reference.Host.ExternalDependency.Simple().Do();
         }
     }
 }

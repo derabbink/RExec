@@ -1,4 +1,5 @@
-﻿using RExec.Client.Samples.Host.Reference;
+﻿using RExec.Client.Samples.Host.Internal;
+using RExec.Client.Samples.Host.Reference;
 using RExec.ClientProxy;
 using RExec.Dispatcher.Contracts.Service;
 using System;
@@ -20,8 +21,8 @@ namespace RExec.Client
             {
                 Console.WriteLine("Invoking IExecutor");
                 Console.WriteLine("");
-                Sample.Run(client.Channel);
-
+                Samples.Host.Internal.Sample.Run(client.Channel);
+                Samples.Host.Reference.Sample.Run(client.Channel);
             }
             Console.WriteLine("Client finished running. Press <ENTER> to quit.");
             Console.ReadLine();

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Instructions.Reference.Host
+namespace RExec.Host.InternalInstructions
 {
     public class RuntimeInfoGenerator
     {
         public void PrintAssemblyNameAndFQTypeNameAndActionName()
         {
-            Console.WriteLine("Instructions.Reference.Host.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
+            Console.WriteLine("RExec.Host.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
             string assemblyName = typeof(RuntimeInfoGenerator).Assembly.GetName().Name;
             string fqTypename = typeof(RuntimeInfoGenerator).FullName;
             string actionName = MethodBase.GetCurrentMethod().Name;
@@ -25,8 +25,8 @@ namespace Instructions.Reference.Host
         /// </summary>
         public void PrintAssemblyNameAndFQTypeNameAndActionNameDependency()
         {
-            Console.WriteLine("Instructions.Reference.Host.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameDependency()");
-            new Instructions.Reference.Host.InternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
+            Console.WriteLine("RExec.Host.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameDependency()");
+            new RExec.Host.InternalInstructions.InternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
         }
 
         /// <summary>
@@ -34,8 +34,8 @@ namespace Instructions.Reference.Host
         /// </summary>
         public void PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()
         {
-            Console.WriteLine("Instructions.Reference.Host.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()");
-            new Instructions.Reference.Host.Dependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
+            Console.WriteLine("RExec.Host.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()");
+            new Instructions.Reference.Host.ExternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
         }
     }
 }
