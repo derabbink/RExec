@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Instructions
+namespace Instructions.Reference.Host
 {
     public class Simple
     {
         public void Do()
         {
-            Console.WriteLine("Simple.Do() is now being executed");
+            Console.WriteLine("Instructions.Reference.Host.Simple.Do() is now being executed");
         }
     }
 }

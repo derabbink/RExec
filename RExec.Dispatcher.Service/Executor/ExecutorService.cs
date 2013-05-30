@@ -16,6 +16,8 @@ namespace RExec.Dispatcher.Service.Executor
             object instance = Activator.CreateInstance(t);
             MethodInfo action = t.GetMethod(instruction.ActionName);
             action.Invoke(instance, new object[]{});
+
+            Console.WriteLine();
         }
     }
 }

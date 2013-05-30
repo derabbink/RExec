@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.ClientProxy", "RExec.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.Client", "RExec.Client\RExec.Client.csproj", "{9E294343-F04F-4571-AFD3-9919942DC4B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instructions", "Instructions\Instructions.csproj", "{854859BA-C271-46E1-84BE-5A12AFCDEC30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instructions.Reference.Host", "Instructions.Reference.Host\Instructions.Reference.Host.csproj", "{854859BA-C271-46E1-84BE-5A12AFCDEC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
-﻿using RExec.ClientProxy;
-using RExec.Dispatcher.Contracts.Data;
+﻿using RExec.Client.Samples;
+using RExec.ClientProxy;
 using RExec.Dispatcher.Contracts.Service;
 using System;
 using System.Collections.Generic;
@@ -18,12 +18,13 @@ namespace RExec.Client
 
             using (Client<IExecutor> client = factory.GetClient())
             {
-                Console.WriteLine("Testing IExecutor");
-                Console.WriteLine("  .Execute()");
-                client.Channel.Execute(new Instruction() { AssemblyName = "SampleInstructions", FQTypeName = "Instructions.Simple", ActionName = "Do" });
-                
-                Console.WriteLine();
+                Console.WriteLine("Invoking IExecutor");
+                Console.WriteLine("");
+                ExecuteInternal.Run(client.Channel);
+
             }
+            Console.WriteLine("Client finished running. Press <ENTER> to quit.");
+            Console.ReadLine();
         }
     }
 }

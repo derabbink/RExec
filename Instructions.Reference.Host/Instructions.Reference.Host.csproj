@@ -7,8 +7,8 @@
     <ProjectGuid>{854859BA-C271-46E1-84BE-5A12AFCDEC30}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Instructions</RootNamespace>
-    <AssemblyName>SampleInstructions</AssemblyName>
+    <RootNamespace>Instructions.Reference.Host</RootNamespace>
+    <AssemblyName>Instructions.Reference.Host</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RuntimeInfoGenerator.cs" />
     <Compile Include="Simple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
