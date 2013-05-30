@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Instructions.Reference.Host
+namespace RExec.Host.Instructions
 {
     public class RuntimeInfoGenerator
     {
         public void PrintAssemblyNameAndFQTypeNameAndActionName()
         {
-            Console.WriteLine("Instructions.Reference.Host.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
+            Console.WriteLine("RExec.Host.Instructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
             string assemblyName = typeof(Simple).Assembly.GetName().Name;
             string fqTypename = typeof(Simple).FullName;
             string actionName = MethodBase.GetCurrentMethod().Name;

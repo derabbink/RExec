@@ -10,7 +10,7 @@ namespace RExec.Host.Instructions
     {
         public void Do()
         {
-            Console.WriteLine("Instructions.Reference.Host.Simple.Do() is now being executed");
+            Console.WriteLine("RExec.Host.Instructions.Simple.Do() is now being executed");
         }
     }
 }
