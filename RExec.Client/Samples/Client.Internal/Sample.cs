@@ -19,59 +19,58 @@ namespace RExec.Client.Samples.Client.Internal
         public static void Run(IAssemblyManager aManager, IExecutor executor)
         {
             Console.WriteLine("Executing code from client's own assembly");
-            simpleInstructions(aManager, executor);
+            transportAssembly(aManager);
+            Console.WriteLine();
+            simpleInstructions(executor);
             Console.WriteLine();
             runtimeInfoGeneratorInstructions(executor);
             Console.WriteLine();
         }
 
-        private static void simpleInstructions(IAssemblyManager aManager, IExecutor executor)
+        private static void transportAssembly(IAssemblyManager aManager)
         {
-            using (Stream alphabetStream = new MemoryStream())
+            //this won't work yet. dependency assemblies need to be transported first.
+            Console.WriteLine("  Getting executing assembly");
+            System.Reflection.Assembly assy = System.Reflection.Assembly.GetExecutingAssembly();
+            String path = assy.Location;
+            using (Stream assyFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
             {
-                //with MemoryStream write data first, then reset position
-                Console.WriteLine("  Writing data to stream");
-                Encoding enc = new UnicodeEncoding();
-                //write the alphabet to stream
-                for (char c = 'A'; c <= 'Z'; c++)
-                {
-                    byte[] buffer = enc.GetBytes(new[] {c}, 0, 1);
-                    alphabetStream.Write(buffer, 0, buffer.Length);
-                }
-                alphabetStream.Position = 0;
-
-                Console.WriteLine("  Streaming data to host...");
-                Assembly assy = new Assembly() { AssemblyStream = alphabetStream };
-                aManager.AddAssembly(assy);
+                Console.WriteLine("    Transmitting assembly as FileStream");
+                Assembly msg = new Assembly {AssemblyStream = assyFileStream};
+                aManager.AddAssembly(msg);
             }
-//            Instruction instr = new Instruction() { AssemblyName = "RExec.Client", FQTypeName = "RExec.Client.InternalInstructions.Simple", ActionName = "Do" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
-//
-//            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoDependency" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
-//
-//            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoReferenceDependency" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
+        }
+
+        private static void simpleInstructions(IExecutor executor)
+        {
+            Instruction instr = new Instruction() { AssemblyName = "RExec.Client", FQTypeName = "RExec.Client.InternalInstructions.Simple", ActionName = "Do" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
+
+            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoDependency" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
+
+            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoReferenceDependency" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
 
             Console.WriteLine();
         }
 
         private static void runtimeInfoGeneratorInstructions(IExecutor executor)
         {
-//            Instruction instr = new Instruction() { AssemblyName = "RExec.Client", FQTypeName = "RExec.Client.InternalInstructions.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
-//
-//            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameDependency" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
-//
-//            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency" };
-//            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-//            executor.Execute(instr);
+            Instruction instr = new Instruction() { AssemblyName = "RExec.Client", FQTypeName = "RExec.Client.InternalInstructions.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
+
+            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameDependency" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
+
+            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency" };
+            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
+            executor.Execute(instr);
 
             Console.WriteLine();
         }

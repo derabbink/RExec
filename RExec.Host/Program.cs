@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using Plugin;
 using RExec.Dispatcher.Service.AssemblyManager;
 using RExec.Dispatcher.Service.Executor;
 
@@ -12,9 +13,11 @@ namespace RExec.Host
     {
         static void Main(string[] args)
         {
-            // Create a ServiceHost for the service contract.
+            // Create ServiceHosts for the service contracts.
             ServiceHost executorHost = new ServiceHost(typeof(ExecutorService));
-            ServiceHost amHost = new ServiceHost(typeof(AssemblyManagerService));
+
+            AssemblyManagerService amService = new AssemblyManagerService(new PluginManager());
+            ServiceHost amHost = new ServiceHost(amService);
             
             executorHost.Open();
             Console.WriteLine("The IExecutor service is ready.");

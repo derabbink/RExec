@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.Host", "RExec.Host\RExec.Host.csproj", "{93D86A98-3513-409A-9380-C0F6730018E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RExec.Dispatcher.Service", "RExec.Dispatcher.Service\RExec.Dispatcher.Service.csproj", "{92EF76E0-E8BF-4AB0-8B20-24E7FD06812C}"
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instructions.Reference.Client", "Instructions.Reference.Client\Instructions.Reference.Client.csproj", "{93A2B703-C534-4957-AF3A-746B7FF99CE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instructions.Reference.Client.Dependency", "Instructions.Reference.Client.Dependency\Instructions.Reference.Client.Dependency.csproj", "{88E16510-402C-4E04-BC09-836D7E4F7506}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,16 @@ Global
 		{88E16510-402C-4E04-BC09-836D7E4F7506}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{88E16510-402C-4E04-BC09-836D7E4F7506}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{88E16510-402C-4E04-BC09-836D7E4F7506}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
