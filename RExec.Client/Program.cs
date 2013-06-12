@@ -15,15 +15,21 @@ namespace RExec.Client
         static void Main(string[] args)
         {
             // "*" takes the first endpoint configuration that matches the service contract
-            ClientFactory<IExecutor> factory = new ClientFactory<IExecutor>("*");
+            ClientFactory<IExecutor> executorFactory = new ClientFactory<IExecutor>("*");
+            ClientFactory<IAssemblyManager> amFactory = new ClientFactory<IAssemblyManager>("*");
 
-            using (Client<IExecutor> client = factory.GetClient())
-            {
-                Console.WriteLine("Invoking IExecutor");
-                Console.WriteLine("");
-                Samples.Host.Internal.Sample.Run(client.Channel);
-                Samples.Host.Reference.Sample.Run(client.Channel);
-            }
+            Client<IExecutor> ex = executorFactory.GetClient();
+            Client<IAssemblyManager> am = amFactory.GetClient();
+
+            Console.WriteLine("Invoking IExecutor");
+            Console.WriteLine("");
+            Samples.Host.Internal.Sample.Run(ex.Channel);
+            Samples.Host.Reference.Sample.Run(ex.Channel);
+            Samples.Client.Internal.Sample.Run(am.Channel, ex.Channel);
+            
+            am.Dispose();
+            ex.Dispose();
+            
             Console.WriteLine("Client finished running. Press <ENTER> to quit.");
             Console.ReadLine();
         }

@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Message\Assembly.cs" />
     <Compile Include="Data\Instruction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IAssemblyManager.cs" />
     <Compile Include="Service\IExecutor.cs" />
   </ItemGroup>
   <ItemGroup />

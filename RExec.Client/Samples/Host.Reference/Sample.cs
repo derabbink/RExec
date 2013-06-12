@@ -1,4 +1,5 @@
-﻿using RExec.Dispatcher.Contracts.Data;
+﻿using System.IO;
+using RExec.Dispatcher.Contracts.Data;
 using RExec.Dispatcher.Contracts.Service;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace RExec.Client.Samples.Host.Reference
 
         private static void simpleInstructions(IExecutor executor)
         {
+            
             Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host", FQTypeName = "Instructions.Reference.Host.Simple", ActionName = "Do" };
             Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
             executor.Execute(instr);
