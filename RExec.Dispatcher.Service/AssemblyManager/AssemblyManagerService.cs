@@ -13,11 +13,11 @@ namespace RExec.Dispatcher.Service.AssemblyManager
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class AssemblyManagerService : IAssemblyManager
     {
-        private readonly PluginManager _pluginManager;
+        //private readonly PluginManager _pluginManager;
 
-        public AssemblyManagerService(PluginManager pluginManager)
+        public AssemblyManagerService()//PluginManager pluginManager)
         {
-            this._pluginManager = pluginManager;
+            //this._pluginManager = pluginManager;
         }
 
         public void AddAssembly(Assembly assembly)
@@ -27,7 +27,7 @@ namespace RExec.Dispatcher.Service.AssemblyManager
             assembly.AssemblyStream.CopyTo(memStream);
             byte[] streamData = memStream.ToArray();
 
-            _pluginManager.Load(streamData);
+            //_pluginManager.Load(streamData);
         }
     }
 }

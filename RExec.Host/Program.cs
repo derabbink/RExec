@@ -16,19 +16,19 @@ namespace RExec.Host
             // Create ServiceHosts for the service contracts.
             ServiceHost executorHost = new ServiceHost(typeof(ExecutorService));
 
-            AssemblyManagerService amService = new AssemblyManagerService(new PluginManager());
-            ServiceHost amHost = new ServiceHost(amService);
+            //AssemblyManagerService amService = new AssemblyManagerService(new PluginManager());
+            //ServiceHost amHost = new ServiceHost(amService);
             
             executorHost.Open();
             Console.WriteLine("The IExecutor service is ready.");
             
-            amHost.Open();
-            Console.WriteLine("The IAssmeblyManager service is ready");
+            //amHost.Open();
+            //Console.WriteLine("The IAssmeblyManager service is ready");
             
             Console.WriteLine("Press <ENTER> to terminate the service.");
             Console.ReadLine();
 
-            amHost.Close();
+            //amHost.Close();
             executorHost.Close();
         }
     }

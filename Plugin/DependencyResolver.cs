@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Reflection;
 using System.Security.Policy;
@@ -19,9 +21,17 @@ namespace Plugin
         {
             AppDomain tempDomain = createTempDomain();
             AssemblyLoader loader = getRemoteAssemblyLoader(tempDomain);
-            Console.WriteLine(loader.PrintConfig());
 
-            var result = GetAllDependenciesRecursive(start, loader, new List<AssemblyName>()).
+            ISet<AssemblyName> assemblies = new HashSet<AssemblyName>();
+
+
+            Func<AssemblyName, AssemblyData> preProcess = loader.ReflectionOnlyLoad;
+            Func<AssemblyName, bool> filter = an => !assemblies.Contains(an, new AssemblyNameEqualityComparer());
+            Action<AssemblyName> postProcess = an => assemblies.Add(an);
+
+            Func<AssemblyName, IObservable<AssemblyName>> descend = an => GetAllDependenciesRecursive(an, filter, preProcess, postProcess);
+
+            var result = GetAllDependenciesRecursive(start, filter, preProcess, postProcess).
                 Finally(() => AppDomain.Unload(tempDomain));
             return result;
         }
@@ -29,35 +39,13 @@ namespace Plugin
         private static AppDomain createTempDomain()
         {
             string name = generateDomainName();
-            //need to reuse config, in order to get access to THIS assembly and dependencies before others can be loaded for inspection
+            //need to reuse config, in order to get access to THIS assembly and dependencies
+            //before others can be loaded into reflection context
             Evidence evidence = AppDomain.CurrentDomain.Evidence;
             AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
             
             AppDomain domain = AppDomain.CreateDomain(name, evidence, setup);
-            domain.AssemblyResolve += assemblyResolve;
             return domain;
-        }
-
-        private static Assembly assemblyResolve(object sender, ResolveEventArgs args)
-        {
-            string path = ConfigurationManager.AppSettings.Get("Plugin.assembly-path");
-            IEnumerable<string> paths = path.Split(Path.PathSeparator);
-            foreach (string p in paths)
-            {
-                DirectoryInfo dir = new DirectoryInfo(p);
-                IEnumerable<FileInfo> files = dir.GetFiles("*.dll");
-                foreach (FileInfo f in files)
-                {
-                    try
-                    {
-                        AssemblyName name = AssemblyName.GetAssemblyName(f.FullName);
-                        if (name.Name == args.Name || name.FullName == args.Name)
-                            return Assembly.LoadFile(f.FullName);
-                    }
-                    catch {}
-                }
-            }
-            return null;
         }
 
         private static string generateDomainName()
@@ -80,43 +68,27 @@ namespace Plugin
             return domain.CreateInstanceAndUnwrap(assyName.Name, typename) as AssemblyLoader;
         }
 
-        static private IObservable<AssemblyName> GetAllDependenciesRecursive(AssemblyName start, AssemblyLoader assemblyLoader, List<AssemblyName> filter)
+        static private IObservable<AssemblyName> GetAllDependenciesRecursive(AssemblyName start, Func<AssemblyName, bool> filter, Func<AssemblyName, AssemblyData> preProcess, Action<AssemblyName> postProcess)
         {
-            Assembly loaded = assemblyLoader.ReflectionOnlyLoad(start);
-
+            AssemblyData loaded = preProcess(start);
+            
             //don't follow leads in the global assembly cache
             if (loaded.GlobalAssemblyCache)
             {
-                filter.Add(loaded.GetName());
+                postProcess(loaded.Name);
                 return Observable.Empty<AssemblyName>();
             }
 
-            IEnumerable<AssemblyName> parent = loaded.GetReferencedAssemblies();
+            IEnumerable<AssemblyName> parent = loaded.ReferencedAssemblies;
 
-            IObservable<AssemblyName> result = parent.ToObservable().
-                                                      //Select(an => augmentAssemblyName(an, start)).
-                                                      Do(an => Console.WriteLine("{0} ({1}) depends on {2} ({3})", start.Name, start.CodeBase, an.Name, an.CodeBase)).
-                                                      Where(an => !filter.Contains(an, new AssemblyNameEqualityComparer())).
-                                                      Select(an => GetAllDependenciesRecursive(an, assemblyLoader, filter)).
-                                                      Concat().
-                                                      Concat(Observable.Return(start)).
-                                                      Do(filter.Add);
+            
+            IObservable<AssemblyName> result = parent.ToObservable()
+                                                     .Where(filter)
+                                                     .Select(an => GetAllDependenciesRecursive(an, filter, preProcess, postProcess)).Concat()
+                                                     .Concat(Observable.Return(loaded.Name)) //loaded.Name contains correct CodeBase
+                                                     .Do(postProcess);
             return result;
         }
 
-        /// <summary>
-        /// Adds information to an AssemblyName, derived from a provided context AssemblyName
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        private static AssemblyName augmentAssemblyName(AssemblyName name, AssemblyName context)
-        {
-            if (string.IsNullOrEmpty(name.CodeBase))
-            {
-                
-            }
-            return name;
-        }
     }
 }

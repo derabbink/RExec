@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyData.cs" />
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyNameEqualityComparer.cs" />
     <Compile Include="DependencyResolver.cs" />
