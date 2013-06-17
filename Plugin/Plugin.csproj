@@ -57,10 +57,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyNameEqualityComparer.cs" />
     <Compile Include="DependencyResolver.cs" />
-    <Compile Include="Node.cs" />
-    <Compile Include="PluginManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RxDFS.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -25,8 +25,7 @@ namespace RExec.Client
             Console.WriteLine("");
             Samples.Host.Internal.Sample.Run(ex.Channel);
             Samples.Host.Reference.Sample.Run(ex.Channel);
-            //not quite done
-//            Samples.Client.Internal.Sample.Run(am.Channel, ex.Channel);
+            Samples.Client.Internal.Sample.Run(am.Channel, ex.Channel);
             
             am.Dispose();
             ex.Dispose();

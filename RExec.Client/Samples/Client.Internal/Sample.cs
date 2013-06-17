@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Plugin;
 using RExec.Dispatcher.Contracts.Data;
-using RExec.Dispatcher.Contracts.Message;
 using RExec.Dispatcher.Contracts.Service;
+using Assembly = RExec.Dispatcher.Contracts.Message.Assembly;
 
 namespace RExec.Client.Samples.Client.Internal
 {
@@ -29,16 +31,19 @@ namespace RExec.Client.Samples.Client.Internal
 
         private static void transportAssembly(IAssemblyManager aManager)
         {
-            //this won't work yet. dependency assemblies need to be transported first.
             Console.WriteLine("  Getting executing assembly");
             System.Reflection.Assembly assy = System.Reflection.Assembly.GetExecutingAssembly();
-            String path = assy.Location;
-            using (Stream assyFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-            {
-                Console.WriteLine("    Transmitting assembly as FileStream");
-                Assembly msg = new Assembly {AssemblyStream = assyFileStream};
-                aManager.AddAssembly(msg);
-            }
+            IObservable<AssemblyName> dependencies = DependencyResolver.GetAllDependencies(assy.GetName());
+            dependencies.Subscribe(an =>
+                {
+                    String path = new Uri(an.CodeBase).LocalPath;
+                    Console.WriteLine("    Transmitting assembly as FileStream ({0})", path);
+                    using (Stream assyFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
+                    {
+                        Assembly msg = new Assembly { AssemblyStream = assyFileStream };
+                        aManager.AddAssembly(msg);
+                    }
+                });
         }
 
         private static void simpleInstructions(IExecutor executor)

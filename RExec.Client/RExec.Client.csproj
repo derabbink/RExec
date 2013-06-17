@@ -35,6 +35,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.1.30214.0\lib\Net40\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.1.30214.0\lib\Net40\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,11 +62,16 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Instructions.Reference.Client\Instructions.Reference.Client.csproj">
       <Project>{93a2b703-c534-4957-af3a-746b7ff99ce1}</Project>
       <Name>Instructions.Reference.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin\Plugin.csproj">
+      <Project>{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}</Project>
+      <Name>Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\RExec.ClientProxy\RExec.ClientProxy.csproj">
       <Project>{3c444689-2940-4974-ae85-70eb4ac2820d}</Project>

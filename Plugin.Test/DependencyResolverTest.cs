@@ -11,14 +11,6 @@ namespace Plugin.Test
     public class DependencyResolverTest
     {
         [Test]
-        public void MockRxDFS()
-        {
-            RxDFS.GetAllParents(new Node(10)).
-                Subscribe(n => Console.WriteLine("    {0}", n.Number));
-            Assert.Inconclusive();
-        }
-
-        [Test]
         public void GetAllDependenciesTest()
         {
             Assembly self = Assembly.GetExecutingAssembly();
