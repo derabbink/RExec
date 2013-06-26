@@ -13,5 +13,8 @@ namespace RExec.Dispatcher.Contracts.Service
     {
         [OperationContract]
         void AddAssembly(Assembly assembly);
+
+        [OperationContract]
+        void Clear();
     }
 }

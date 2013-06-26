@@ -6,9 +6,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Plugin;
 using RExec.Dispatcher.Contracts.Data;
 using RExec.Dispatcher.Contracts.Service;
+using DependencyResolver;
 using Assembly = RExec.Dispatcher.Contracts.Message.Assembly;
 
 namespace RExec.Client.Samples.Client.Internal
@@ -33,14 +33,14 @@ namespace RExec.Client.Samples.Client.Internal
         {
             Console.WriteLine("  Getting executing assembly");
             System.Reflection.Assembly assy = System.Reflection.Assembly.GetExecutingAssembly();
-            IObservable<AssemblyName> dependencies = DependencyResolver.GetAllDependencies(assy.GetName());
+            IObservable<AssemblyName> dependencies = Resolver.GetAllDependencies(assy.GetName());
             dependencies.Subscribe(an =>
                 {
                     String path = new Uri(an.CodeBase).LocalPath;
-                    Console.WriteLine("    Transmitting assembly as FileStream ({0})", path);
+                    Console.WriteLine("    Transmitting assembly as FileStream ({0} bytes, {1})", new FileInfo(path).Length, path);
                     using (Stream assyFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                     {
-                        Assembly msg = new Assembly { AssemblyStream = assyFileStream };
+                        Assembly msg = new Assembly { AssemblyStream = assyFileStream, Name = an.Name, FullName = an.FullName };
                         aManager.AddAssembly(msg);
                     }
                 });

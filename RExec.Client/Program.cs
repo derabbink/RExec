@@ -23,8 +23,8 @@ namespace RExec.Client
 
             Console.WriteLine("Invoking IExecutor");
             Console.WriteLine("");
-            Samples.Host.Internal.Sample.Run(ex.Channel);
-            Samples.Host.Reference.Sample.Run(ex.Channel);
+            Samples.Host.Internal.Sample.Run(am.Channel, ex.Channel);
+            Samples.Host.Reference.Sample.Run(am.Channel, ex.Channel);
             Samples.Client.Internal.Sample.Run(am.Channel, ex.Channel);
             
             am.Dispose();

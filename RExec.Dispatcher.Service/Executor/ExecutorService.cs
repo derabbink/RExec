@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
+using Plugin;
 using RExec.Dispatcher.Contracts.Service;
 using RExec.Dispatcher.Contracts.Data;
 using System.Reflection;
 
 namespace RExec.Dispatcher.Service.Executor
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class ExecutorService : IExecutor
     {
+        private PluginManager _pluginManager;
+
+        public ExecutorService(PluginManager pluginManager)
+        {
+            _pluginManager = pluginManager;
+        }
+
         public void Execute(Instruction instruction)
         {
-            Type t = Type.GetType(string.Format("{0}, {1}", instruction.FQTypeName, instruction.AssemblyName), true);
-            object instance = Activator.CreateInstance(t);
-            MethodInfo action = t.GetMethod(instruction.ActionName);
-            action.Invoke(instance, new object[]{});
-
-            Console.WriteLine();
+            _pluginManager.Execute(instruction.AssemblyName, instruction.FQTypeName, instruction.ActionName);
         }
     }
 }

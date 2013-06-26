@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DependencyResolver, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DependencyResolver.1.0.0.1\lib\net40\DependencyResolver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive.Core">
@@ -40,6 +44,12 @@
     </Reference>
     <Reference Include="System.Reactive.Interfaces">
       <HintPath>..\packages\Rx-Interfaces.2.1.30214.0\lib\Net40\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.1.30214.0\lib\Net40\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.1.30214.0\lib\Net40\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -68,10 +78,6 @@
     <ProjectReference Include="..\Instructions.Reference.Client\Instructions.Reference.Client.csproj">
       <Project>{93a2b703-c534-4957-af3a-746b7ff99ce1}</Project>
       <Name>Instructions.Reference.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plugin\Plugin.csproj">
-      <Project>{BB033D4D-2FA0-40DE-96B3-B2D26B28EC14}</Project>
-      <Name>Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\RExec.ClientProxy\RExec.ClientProxy.csproj">
       <Project>{3c444689-2940-4974-ae85-70eb4ac2820d}</Project>
