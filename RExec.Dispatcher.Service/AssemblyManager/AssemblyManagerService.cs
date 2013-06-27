@@ -29,6 +29,7 @@ namespace RExec.Dispatcher.Service.AssemblyManager
 
         public void Clear()
         {
+            Console.WriteLine("Receiving assembly clear command.");
             _pluginManager.Reset();
         }
 

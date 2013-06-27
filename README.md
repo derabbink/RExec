@@ -24,12 +24,15 @@ Since serialization of delegates is not a good idea, you can't just transport th
 The next best option is to use reflection to instruct the remote machine what methods to invoke, based on their name, fully qualified class name and the name of the assembly they are located in.
 But for this to work, the assembly containing the method needs to be loaded by the executing machine.
 
-Transporting such an assembly to, and loading it on a remote machine is not yet implemented. **To be continued...**
+Transporting such an assembly to, and loading it on a remote machine is implemented using a streaming WCF service.
 
 
 ### Method Invocation Trees
 
+All kinds of method invocations require the assembly containing the med implementations toe be transported first.
+This includes the host-internal instructions.
 Currently the idea is to test the following kinds of invocation paths (nested bullet lists are supposed to be a tree structure):
+
 
  * host assembly `RExec.Host.InternalInstructions`
   * (same) host assembly `RExec.Host.InternalInstructions.InternalDependency`
@@ -37,16 +40,16 @@ Currently the idea is to test the following kinds of invocation paths (nested bu
  * referenced assembly `Instructions.Reference.Host`
   * (same) referenced assembly `Instructions.Reference.Host.InternalDependency`
   * referenced assembly to the referenced assembly `Instructions.Reference.Host.Dependency`
-
-**not implemented yet:** (but some parts are in the code already)
-
  * client assembly `RExec.Client.InternalInstructions`
   * (same) client assembly `RExec.Client.InternalInstructions.InternalDependency`
   * referenced assembly `Instructions.Reference.Client.ExternalDependency`
  * referenced assembly `Instructions.Reference.Client`
   * (same) referenced assembly `Instructions.Reference.Client.InternalDependency`
   * referenced assembly to the referenced assembly `Instructions.Reference.Client.Dependency`
- * independent assembly
+
+**not implemented yet:**
+
+  * independent assembly
   * (same) independent assembly
   * referenced assembly to the independent assembly
 

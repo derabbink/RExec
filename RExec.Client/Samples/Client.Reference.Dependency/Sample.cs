@@ -9,16 +9,16 @@ using System.Linq;
 using System.Text;
 using Assembly = RExec.Dispatcher.Contracts.Message.Assembly;
 
-namespace RExec.Client.Samples.Host.Reference
+namespace RExec.Client.Samples.Client.Reference.Dependency
 {
     /// <summary>
-    /// Demonstrates executing instructions located in one of the host's reference assemblies
+    /// Demonstrates executing instructions located in one of the client's reference's reference assemblies
     /// </summary>
     internal class Sample
     {
         internal static void Run(IAssemblyManager aManager, IExecutor executor)
         {
-            Console.WriteLine("Executing code from host's reference assembly");
+            Console.WriteLine("Executing code from client's reference's reference assembly");
             transportAssembly(aManager);
             Console.WriteLine();
             simpleInstructions(executor);
@@ -32,7 +32,7 @@ namespace RExec.Client.Samples.Host.Reference
         private static void transportAssembly(IAssemblyManager aManager)
         {
             Console.WriteLine("  Getting executing assembly");
-            AssemblyName start = AssemblyName.GetAssemblyName("..\\..\\..\\Instructions.Reference.Host\\bin\\Debug\\Instructions.Reference.Host.dll");
+            AssemblyName start = AssemblyName.GetAssemblyName("..\\..\\..\\Instructions.Reference.Client.Dependency\\bin\\Debug\\Instructions.Reference.Client.Dependency.dll");
             IObservable<AssemblyName> dependencies = Resolver.GetAllDependencies(start);
             dependencies.Subscribe(an =>
             {
@@ -49,15 +49,7 @@ namespace RExec.Client.Samples.Host.Reference
         private static void simpleInstructions(IExecutor executor)
         {
             
-            Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host", FQTypeName = "Instructions.Reference.Host.Simple", ActionName = "Do" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
-
-            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
-
-            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoReferenceDependency" };
+            Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Client.Dependency", FQTypeName = "Instructions.Reference.Client.Dependency.Simple", ActionName = "Do" };
             Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
             executor.Execute(instr);
 
@@ -66,15 +58,7 @@ namespace RExec.Client.Samples.Host.Reference
 
         private static void runtimeInfoGeneratorInstructions(IExecutor executor)
         {
-            Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host", FQTypeName = "Instructions.Reference.Host.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
-
-            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
-
-            instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency" };
+            Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Client.Dependency", FQTypeName = "Instructions.Reference.Client.Dependency.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
             Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
             executor.Execute(instr);
 

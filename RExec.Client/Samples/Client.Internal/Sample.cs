@@ -27,6 +27,8 @@ namespace RExec.Client.Samples.Client.Internal
             Console.WriteLine();
             runtimeInfoGeneratorInstructions(executor);
             Console.WriteLine();
+            clearAssemblyManager(aManager);
+            Console.WriteLine();
         }
 
         private static void transportAssembly(IAssemblyManager aManager)
@@ -78,6 +80,12 @@ namespace RExec.Client.Samples.Client.Internal
             executor.Execute(instr);
 
             Console.WriteLine();
+        }
+
+        private static void clearAssemblyManager(IAssemblyManager aManager)
+        {
+            Console.WriteLine("  Sending assembly clear command");
+            aManager.Clear();
         }
     }
 }
