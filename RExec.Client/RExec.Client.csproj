@@ -65,6 +65,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\Client.Internal\Sample.cs" />
+    <Compile Include="Samples\Client.Reference.Dependency\Sample.cs" />
+    <Compile Include="Samples\Client.Reference\Sample.cs" />
     <Compile Include="Samples\Host.Internal\Sample.cs" />
     <Compile Include="Samples\Host.Reference.Dependency\Sample.cs" />
     <Compile Include="Samples\Host.Reference\Sample.cs" />
@@ -89,10 +91,7 @@
       <Name>RExec.Dispatcher.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Samples\Client.Reference.Dependency\" />
-    <Folder Include="Samples\Client.Reference\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -24,7 +24,7 @@ namespace Plugin
 
         public PluginManager()
         {
-            _storageDir = ConfigurationManager.AppSettings.Get("RExec.Dispatcher.Service.assembly-storage-dir");
+            _storageDir = ConfigurationManager.AppSettings.Get("Plugin.assembly-storage-dir");
             createAppDomainAndExecutor();
         }
 
