@@ -12,7 +12,6 @@ using DependencyResolver;
 
 namespace RExec.Client.Test
 {
-    [TestFixture]
     public abstract class RExecTest
     {
         private Client<IExecutor> _ex;

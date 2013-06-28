@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace RExec.Client.Test
+namespace RExec.Client.Test.Client.ReferenceDependency
 {
     [TestFixture]
-    public class ClientReferenceDependencyAdvanced : RExecTest
+    public class Advanced : RExecTest
     {
         protected override string assemblyName { get { return "Instructions.Reference.Client.Dependency"; } }
         protected override string assemblyPath { get { return "..\\..\\..\\Instructions.Reference.Client.Dependency\\bin\\Debug\\Instructions.Reference.Client.Dependency.dll"; } }

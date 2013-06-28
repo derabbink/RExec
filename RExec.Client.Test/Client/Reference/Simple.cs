@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Text;
-using Microsoft.Test.ApplicationControl;
 using NUnit.Framework;
-using RExec.Client.Test.Util;
 using RExec.ClientProxy;
-using RExec.Dispatcher.Contracts.Data;
 using RExec.Dispatcher.Contracts.Service;
-using DependencyResolver;
 
-namespace RExec.Client.Test
+namespace RExec.Client.Test.Client.Reference
 {
     [TestFixture]
-    public class ClientInternalSimple : RExecTest
+    public class Simple : RExecTest
     {
-        protected override string assemblyName { get { return "RExec.Client"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\RExec.Client\\bin\\Debug\\RExec.Client.exe"; } }
-        protected override string fqTypeName { get { return "RExec.Client.InternalInstructions.Simple"; } }
+        protected override string assemblyName { get { return "Instructions.Reference.Client"; } }
+        protected override string assemblyPath { get { return "..\\..\\..\\Instructions.Reference.Client\\bin\\Debug\\Instructions.Reference.Client.dll"; } }
+        protected override string fqTypeName { get { return "Instructions.Reference.Client.Simple"; } }
 
         [Test]
         public new void InvokeMethod([Values(

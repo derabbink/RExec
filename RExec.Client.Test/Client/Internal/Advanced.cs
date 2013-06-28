@@ -5,10 +5,10 @@ using System.Text;
 using NUnit.Framework;
 using RExec.Dispatcher.Contracts.Data;
 
-namespace RExec.Client.Test
+namespace RExec.Client.Test.Client.Internal
 {
     [TestFixture]
-    public class ClientInternalAdvanced : RExecTest
+    public class Advanced : RExecTest
     {
         protected override string assemblyName { get { return "RExec.Client"; } }
         protected override string assemblyPath { get { return "..\\..\\..\\RExec.Client\\bin\\Debug\\RExec.Client.exe"; } }
