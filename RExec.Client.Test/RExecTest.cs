@@ -15,6 +15,9 @@ namespace RExec.Client.Test
     [TestFixture]
     public abstract class RExecTest
     {
+        internal const int MethodName = 0;
+        internal const int ExpectedResult = 1;
+
         private Client<IExecutor> _ex;
         protected IExecutor executor { get { return _ex.Channel; } }
         
@@ -33,7 +36,7 @@ namespace RExec.Client.Test
             _ex = executorFactory.GetClient();
         }
 
-        public void InvokeMethod(string methodName)
+        public object InvokeMethod(string methodName)
         {
             Instruction instr = new Instruction()
             {
@@ -41,7 +44,7 @@ namespace RExec.Client.Test
                 FQTypeName = fqTypeName,
                 ActionName = methodName
             };
-            executor.Execute(instr);
+            return executor.Execute(instr);
         }
 
         [TestFixtureTearDown]

@@ -9,27 +9,40 @@ namespace RExec.Client.InternalInstructions
 {
     public class Simple
     {
-        public void Do()
+        private const string typeName = "RExec.Client.InternalInstructions.Simple";
+        
+        public string Do()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.Simple.Do() is now being executed");
+            string methodName = "Do";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            return result;
         }
 
         /// <summary>
         /// calls another method within the same (this) assembly
         /// </summary>
-        public void DoDependency()
+        public string DoDependency()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.Simple.DoDependency() is now being executed");
-            new RExec.Client.InternalInstructions.InternalDependency.Simple().Do();
+            string methodName = "DoDependency";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            result = string.Format("{0}->{1}", result,
+                                   new RExec.Client.InternalInstructions.InternalDependency.Simple().Do());
+            return result;
         }
 
         /// <summary>
         /// calls external method in another (external) assembly
         /// </summary>
-        public void DoReferenceDependency()
+        public string DoReferenceDependency()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.Simple.DoReferenceDependency() is now being executed");
-            new Instructions.Reference.Client.ExternalDependency.Simple().Do();
+            string methodName = "DoReferenceDependency";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            result = string.Format("{0}->{1}", result,
+                                   new Instructions.Reference.Client.ExternalDependency.Simple().Do());
+            return result;
         }
     }
 }

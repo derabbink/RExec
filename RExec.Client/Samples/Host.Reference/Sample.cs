@@ -50,16 +50,19 @@ namespace RExec.Client.Samples.Host.Reference
         {
             
             Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host", FQTypeName = "Instructions.Reference.Host.Simple", ActionName = "Do" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            string result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "DoReferenceDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             Console.WriteLine();
         }
@@ -67,16 +70,19 @@ namespace RExec.Client.Samples.Host.Reference
         private static void runtimeInfoGeneratorInstructions(IExecutor executor)
         {
             Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host", FQTypeName = "Instructions.Reference.Host.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            string result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             instr = new Instruction() { AssemblyName = instr.AssemblyName, FQTypeName = instr.FQTypeName, ActionName = "PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             Console.WriteLine();
         }

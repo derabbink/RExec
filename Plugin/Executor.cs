@@ -25,12 +25,12 @@ namespace Plugin
             return domain.CreateInstanceAndUnwrap(ownAssyName.FullName, typename) as Executor;
         }
 
-        internal void Execute(string assemblyName, string typeName, string actionName)
+        internal object Execute(string assemblyName, string typeName, string actionName)
         {
             Type t = Type.GetType(string.Format("{0}, {1}", typeName, assemblyName), true);
             object instance = Activator.CreateInstance(t);
             MethodInfo action = t.GetMethod(actionName);
-            action.Invoke(instance, new object[] { });
+            return action.Invoke(instance, new object[] { });
         }
 
         internal void LoadAssembly(string assemblyName)

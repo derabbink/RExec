@@ -11,6 +11,6 @@ namespace RExec.Dispatcher.Contracts.Service
     public interface IExecutor
     {
         [OperationContract]
-        void Execute(Instruction instruction);
+        object Execute(Instruction instruction);
     }
 }

@@ -20,9 +20,9 @@ namespace RExec.Dispatcher.Service.Executor
             _pluginManager = pluginManager;
         }
 
-        public void Execute(Instruction instruction)
+        public object Execute(Instruction instruction)
         {
-            _pluginManager.Execute(instruction.AssemblyName, instruction.FQTypeName, instruction.ActionName);
+            return _pluginManager.Execute(instruction.AssemblyName, instruction.FQTypeName, instruction.ActionName);
         }
     }
 }

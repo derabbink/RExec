@@ -50,8 +50,9 @@ namespace RExec.Client.Samples.Host.Reference.Dependency
         {
             
             Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host.Dependency", FQTypeName = "Instructions.Reference.Host.Dependency.Simple", ActionName = "Do" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            string result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             Console.WriteLine();
         }
@@ -59,8 +60,9 @@ namespace RExec.Client.Samples.Host.Reference.Dependency
         private static void runtimeInfoGeneratorInstructions(IExecutor executor)
         {
             Instruction instr = new Instruction() { AssemblyName = "Instructions.Reference.Host.Dependency", FQTypeName = "Instructions.Reference.Host.Dependency.RuntimeInfoGenerator", ActionName = "PrintAssemblyNameAndFQTypeNameAndActionName" };
-            Console.WriteLine("  {0}(), {1}, {2}", instr.ActionName, instr.FQTypeName, instr.AssemblyName);
-            executor.Execute(instr);
+            Console.WriteLine("  {0}:{1}.{2}()", instr.AssemblyName, instr.FQTypeName, instr.ActionName);
+            string result = executor.Execute(instr) as string;
+            Console.WriteLine("  = {0}", result);
 
             Console.WriteLine();
         }

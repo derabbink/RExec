@@ -62,7 +62,16 @@ namespace Plugin
                 {
                     string path = new Uri(an.CodeBase).LocalPath;
                     string fName = Path.GetFileName(path);
-                    File.Copy(path, Path.Combine(_storageDir, fName), true);
+                    try
+                    {
+                        File.Copy(path, Path.Combine(_storageDir, fName), true);
+                    }
+                    catch (IOException ex)
+                    {
+                        //skip over locked files. this means they are already loaded
+                        if (!isFileLocked(ex))
+                            throw;
+                    }
                 });
         }
 
@@ -150,10 +159,11 @@ namespace Plugin
             createAppDomainAndExecutor();
         }
 
-        public void Execute(string assemblyName, string typeName, string actionName)
+        public object Execute(string assemblyName, string typeName, string actionName)
         {
-            _executor.Execute(assemblyName, typeName, actionName);
+            object result = _executor.Execute(assemblyName, typeName, actionName);
             Console.WriteLine();
+            return result;
         }
 
         private void unloadAppDomain()

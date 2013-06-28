@@ -21,14 +21,17 @@ namespace RExec.Client.Test.Client.Internal
         protected override string fqTypeName { get { return "RExec.Client.InternalInstructions.Simple"; } }
 
         [Test]
-        public new void InvokeMethod([Values(
-                                         "Do",
-                                         "DoDependency",
-                                         "DoReferenceDependency")] string
-                                         methodName)
+        public void InvokeMethod([Values(
+                new[]{"Do",
+                      "RExec.Client.InternalInstructions.Simple.Do()"},
+                new[]{"DoDependency",
+                      "RExec.Client.InternalInstructions.Simple.DoDependency()->RExec.Client.InternalInstructions.InternalDependency.Simple.Do()"},
+                new[]{"DoReferenceDependency",
+                      "RExec.Client.InternalInstructions.Simple.DoReferenceDependency()->Instructions.Reference.Client.ExternalDependency.Simple.Do()"})]
+            string[] args)
         {
-            base.InvokeMethod(methodName);
-            Assert.Pass();
+            string actualResult = base.InvokeMethod(args[MethodName]) as string;
+            Assert.That(actualResult, Is.EqualTo(args[ExpectedResult]));
         }
     }
 }

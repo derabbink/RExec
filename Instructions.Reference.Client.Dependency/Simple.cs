@@ -11,9 +11,14 @@ namespace Instructions.Reference.Client.Dependency
     /// </summary>
     public class Simple
     {
-        public void Do()
+        private const string typeName = "Instructions.Reference.Client.Dependency.Simple";
+
+        public string Do()
         {
-            Console.WriteLine("  Instructions.Reference.Client.Dependency.Simple.Do() is now being executed");
+            string methodName = "Do";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            return result;
         }
     }
 }

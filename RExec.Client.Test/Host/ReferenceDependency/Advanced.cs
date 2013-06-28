@@ -13,10 +13,17 @@ namespace RExec.Client.Test.Host.ReferenceDependency
         protected override string fqTypeName { get { return "Instructions.Reference.Host.Dependency.RuntimeInfoGenerator"; } }
 
         [Test]
-        public new void InvokeMethod([Values("PrintAssemblyNameAndFQTypeNameAndActionName")] string methodName)
+        public void InvokeMethod()
+//cannot do [Values()] with one arg
+//            [Values(
+//                new[]{"PrintAssemblyNameAndFQTypeNameAndActionName",
+//                      "Instructions.Reference.Host.Dependency.RuntimeInfoGenerator.Instructions.Reference.Host.Dependency.RuntimeInfoGenerator()=(Instructions.Reference.Host.Dependency,Instructions.Reference.Host.Dependency.RuntimeInfoGenerator,PrintAssemblyNameAndFQTypeNameAndActionName)"})]
+//            string[] args)
         {
-            base.InvokeMethod(methodName);
-            Assert.Pass();
+            string[] args = new[]{"PrintAssemblyNameAndFQTypeNameAndActionName",
+                                  "Instructions.Reference.Host.Dependency.RuntimeInfoGenerator.Instructions.Reference.Host.Dependency.RuntimeInfoGenerator()=(Instructions.Reference.Host.Dependency,Instructions.Reference.Host.Dependency.RuntimeInfoGenerator,PrintAssemblyNameAndFQTypeNameAndActionName)"};
+            string actualResult = base.InvokeMethod(args[MethodName]) as string;
+            Assert.That(actualResult, Is.EqualTo(args[ExpectedResult]));
         }
     }
 }

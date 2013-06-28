@@ -8,34 +8,48 @@ namespace RExec.Client.InternalInstructions
 {
     public class RuntimeInfoGenerator
     {
-        public void PrintAssemblyNameAndFQTypeNameAndActionName()
+        private const string typeName = "RExec.Client.InternalInstructions.RuntimeInfoGenerator";
+
+        public string PrintAssemblyNameAndFQTypeNameAndActionName()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
+            string methodName = "PrintAssemblyNameAndFQTypeNameAndActionName";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            
             string assemblyName = typeof(RuntimeInfoGenerator).Assembly.GetName().Name;
             string fqTypename = typeof(RuntimeInfoGenerator).FullName;
             string actionName = MethodBase.GetCurrentMethod().Name;
+            string computation = string.Format("({0},{1},{2})", assemblyName, fqTypename, actionName);
+            Console.WriteLine("  {0}", computation);
 
-            Console.WriteLine("  AssemblyName: {0}", assemblyName);
-            Console.WriteLine("  FQTypeName: {0}", fqTypename);
-            Console.WriteLine("  ActionName: {0}", actionName);
+            result = string.Format("{0}={1}", result, computation);
+            return result;
         }
 
         /// <summary>
         /// calls another method within the same (this) assembly
         /// </summary>
-        public void PrintAssemblyNameAndFQTypeNameAndActionNameDependency()
+        public string PrintAssemblyNameAndFQTypeNameAndActionNameDependency()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameDependency()");
-            new RExec.Client.InternalInstructions.InternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
+            string methodName = "PrintAssemblyNameAndFQTypeNameAndActionNameDependency";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            result = string.Format("{0}->{1}", result,
+                                   new RExec.Client.InternalInstructions.InternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName());
+            return result;
         }
 
         /// <summary>
         /// calls external method in another (external) assembly
         /// </summary>
-        public void PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()
+        public string PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()
         {
-            Console.WriteLine("RExec.Client.InternalInstructions.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency()");
-            new Instructions.Reference.Client.ExternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName();
+            string methodName = "PrintAssemblyNameAndFQTypeNameAndActionNameReferenceDependency";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            result = string.Format("{0}->{1}", result,
+                                   new Instructions.Reference.Client.ExternalDependency.RuntimeInfoGenerator().PrintAssemblyNameAndFQTypeNameAndActionName());
+            return result;
         }
     }
 }

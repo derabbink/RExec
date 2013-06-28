@@ -12,16 +12,22 @@ namespace Instructions.Reference.Host.ExternalDependency
     /// </summary>
     public class RuntimeInfoGenerator
     {
-        public void PrintAssemblyNameAndFQTypeNameAndActionName()
+        private const string typeName = "Instructions.Reference.Host.ExternalDependency.RuntimeInfoGenerator";
+
+        public string PrintAssemblyNameAndFQTypeNameAndActionName()
         {
-            Console.WriteLine("  Instructions.Reference.Host.ExternalDependency.RuntimeInfoGenerator.PrintAssemblyNameAndFQTypeNameAndActionName()");
+            string methodName = "PrintAssemblyNameAndFQTypeNameAndActionName";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+
             string assemblyName = typeof(RuntimeInfoGenerator).Assembly.GetName().Name;
             string fqTypename = typeof(RuntimeInfoGenerator).FullName;
             string actionName = MethodBase.GetCurrentMethod().Name;
+            string computation = string.Format("({0},{1},{2})", assemblyName, fqTypename, actionName);
+            Console.WriteLine("  {0}", computation);
 
-            Console.WriteLine("    AssemblyName: {0}", assemblyName);
-            Console.WriteLine("    FQTypeName: {0}", fqTypename);
-            Console.WriteLine("    ActionName: {0}", actionName);
+            result = string.Format("{0}={1}", result, computation);
+            return result;
         }
     }
 }

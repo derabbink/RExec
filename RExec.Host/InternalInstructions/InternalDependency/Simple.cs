@@ -11,9 +11,14 @@ namespace RExec.Host.InternalInstructions.InternalDependency
     /// </summary>
     public class Simple
     {
-        public void Do()
+        private const string typeName = "RExec.Host.InternalInstructions.InternalDependency.Simple";
+
+        public string Do()
         {
-            Console.WriteLine("  RExec.Host.InternalInstructions.InternalDependency.Simple.Do() is now being executed");
+            string methodName = "Do";
+            string result = string.Format("{0}.{1}()", typeName, methodName);
+            Console.WriteLine("{0} is now being executed", result);
+            return result;
         }
     }
 }
