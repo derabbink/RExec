@@ -12,45 +12,25 @@ using DependencyResolver;
 
 namespace RExec.Client.Test
 {
+    [TestFixture]
     public abstract class RExecTest
     {
         private Client<IExecutor> _ex;
-        private Client<IAssemblyManager> _am;
         protected IExecutor executor { get { return _ex.Channel; } }
-        protected IAssemblyManager assemblyManager { get { return _am.Channel; } }
-
+        
         protected abstract string assemblyName { get; }
-        protected abstract string assemblyPath { get; }
         protected abstract string fqTypeName { get; }
         
         [TestFixtureSetUp]
         public void Setup()
         {
-            createClients();
-            transmitAssemblies();
+            createClient();
         }
 
-        private void createClients()
+        private void createClient()
         {
             ClientFactory<IExecutor> executorFactory = new ClientFactory<IExecutor>("*");
-            ClientFactory<IAssemblyManager> amFactory = new ClientFactory<IAssemblyManager>("*");
             _ex = executorFactory.GetClient();
-            _am = amFactory.GetClient();
-        }
-
-        private void transmitAssemblies()
-        {
-            AssemblyName start = AssemblyName.GetAssemblyName(assemblyPath);
-            IObservable<AssemblyName> dependencies = Resolver.GetAllDependencies(start);
-            dependencies.Subscribe(an =>
-            {
-                String path = new Uri(an.CodeBase).LocalPath;
-                using (Stream assyFileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    var msg = new Dispatcher.Contracts.Message.Assembly { AssemblyStream = assyFileStream, Name = an.Name, FullName = an.FullName };
-                    assemblyManager.AddAssembly(msg);
-                }
-            });
         }
 
         public void InvokeMethod(string methodName)
@@ -67,18 +47,11 @@ namespace RExec.Client.Test
         [TestFixtureTearDown]
         public void Teardown()
         {
-            clearAssemblies();
-            disposeClients();
+            disposeClient();
         }
 
-        private void clearAssemblies()
+        private void disposeClient()
         {
-            _am.Channel.Clear();
-        }
-
-        private void disposeClients()
-        {
-            _am.Dispose();
             _ex.Dispose();
         }
     }

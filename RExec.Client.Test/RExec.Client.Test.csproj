@@ -66,18 +66,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientInternalAdvanced.cs" />
-    <Compile Include="ClientReferenceAdvanced.cs" />
-    <Compile Include="ClientReferenceDependencyAdvanced.cs" />
-    <Compile Include="ClientReferenceDependencySimple.cs" />
-    <Compile Include="ClientReferenceSimple.cs" />
+    <Compile Include="AssemblySetupTearDown.cs" />
+    <Compile Include="Client\Internal\Advanced.cs" />
+    <Compile Include="Client\Internal\AssemblySetupTearDown.cs" />
+    <Compile Include="Client\ReferenceDependency\AssemblySetupTearDown.cs" />
+    <Compile Include="Client\Reference\Advanced.cs" />
+    <Compile Include="Client\ReferenceDependency\Advanced.cs" />
+    <Compile Include="Client\ReferenceDependency\Simple.cs" />
+    <Compile Include="Client\Reference\AssemblySetupTearDown.cs" />
+    <Compile Include="Client\Reference\Simple.cs" />
     <Compile Include="HostSetupTearDown.cs" />
-    <Compile Include="ClientInternalSimple.cs" />
+    <Compile Include="Client\Internal\Simple.cs" />
     <Compile Include="Host\Internal\Advanced.cs" />
+    <Compile Include="Host\Internal\AssemblySetupTearDown.cs" />
     <Compile Include="Host\Internal\Simple.cs" />
     <Compile Include="Host\ReferenceDependency\Advanced.cs" />
+    <Compile Include="Host\ReferenceDependency\AssemblySetupTearDown.cs" />
     <Compile Include="Host\ReferenceDependency\Simple.cs" />
     <Compile Include="Host\Reference\Advanced.cs" />
+    <Compile Include="Host\Reference\AssemblySetupTearDown.cs" />
     <Compile Include="Host\Reference\Simple.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RExecTest.cs" />

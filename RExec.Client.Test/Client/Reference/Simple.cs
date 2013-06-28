@@ -12,7 +12,6 @@ namespace RExec.Client.Test.Client.Reference
     public class Simple : RExecTest
     {
         protected override string assemblyName { get { return "Instructions.Reference.Client"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\Instructions.Reference.Client\\bin\\Debug\\Instructions.Reference.Client.dll"; } }
         protected override string fqTypeName { get { return "Instructions.Reference.Client.Simple"; } }
 
         [Test]

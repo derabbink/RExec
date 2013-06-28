@@ -11,7 +11,6 @@ namespace RExec.Client.Test.Client.Internal
     public class Advanced : RExecTest
     {
         protected override string assemblyName { get { return "RExec.Client"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\RExec.Client\\bin\\Debug\\RExec.Client.exe"; } }
         protected override string fqTypeName { get { return "RExec.Client.InternalInstructions.RuntimeInfoGenerator"; } }
 
         [Test]

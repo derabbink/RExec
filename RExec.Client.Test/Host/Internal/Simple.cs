@@ -10,7 +10,6 @@ namespace RExec.Client.Test.Host.Internal
     public class Simple : RExecTest
     {
         protected override string assemblyName { get { return "RExec.Host"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\RExec.Host\\bin\\Debug\\RExec.Host.exe"; } }
         protected override string fqTypeName { get { return "RExec.Host.InternalInstructions.Simple"; } }
 
         [Test]
