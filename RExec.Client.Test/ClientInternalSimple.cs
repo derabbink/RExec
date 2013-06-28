@@ -14,6 +14,7 @@ using DependencyResolver;
 
 namespace RExec.Client.Test
 {
+    [TestFixture]
     public class ClientInternalSimple : RExecTest
     {
         protected override string assemblyName { get { return "RExec.Client"; } }

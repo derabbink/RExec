@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using RExec.Dispatcher.Contracts.Data;
 
-namespace RExec.Client.Test
+namespace RExec.Client.Test.Host.Internal
 {
     [TestFixture]
-    public class ClientInternalAdvanced : RExecTest
+    public class Advanced : RExecTest
     {
-        protected override string assemblyName { get { return "RExec.Client"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\RExec.Client\\bin\\Debug\\RExec.Client.exe"; } }
-        protected override string fqTypeName { get { return "RExec.Client.InternalInstructions.RuntimeInfoGenerator"; } }
+        protected override string assemblyName { get { return "RExec.Host"; } }
+        protected override string assemblyPath { get { return "..\\..\\..\\RExec.Host\\bin\\Debug\\RExec.Host.exe"; } }
+        protected override string fqTypeName { get { return "RExec.Host.InternalInstructions.RuntimeInfoGenerator"; } }
 
         [Test]
         public new void InvokeMethod([Values(

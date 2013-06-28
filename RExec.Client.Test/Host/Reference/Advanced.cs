@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace RExec.Client.Test
+namespace RExec.Client.Test.Host.Reference
 {
     [TestFixture]
-    public class ClientReferenceAdvanced : RExecTest
+    public class Advanced : RExecTest
     {
-        protected override string assemblyName { get { return "Instructions.Reference.Client"; } }
-        protected override string assemblyPath { get { return "..\\..\\..\\Instructions.Reference.Client\\bin\\Debug\\Instructions.Reference.Client.dll"; } }
-        protected override string fqTypeName { get { return "Instructions.Reference.Client.RuntimeInfoGenerator"; } }
+        protected override string assemblyName { get { return "Instructions.Reference.Host"; } }
+        protected override string assemblyPath { get { return "..\\..\\..\\Instructions.Reference.Host\\bin\\Debug\\Instructions.Reference.Host.dll"; } }
+        protected override string fqTypeName { get { return "Instructions.Reference.Host.RuntimeInfoGenerator"; } }
 
         [Test]
         public new void InvokeMethod([Values(
