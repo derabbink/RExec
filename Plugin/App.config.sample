@@ -4,13 +4,4 @@
     <!-- path to store incoming assemblies in, before loading (relative to ApplicationBasePath) -->
     <add key="Plugin.assembly-storage-dir" value="transferred" />
   </appSettings>
-
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <!-- may contain the directory listed above -->
-      <!-- (possibly faster than internal PluginManager.findAssemblyInStorageDir) -->
-      <!-- see http://stackoverflow.com/a/6658224/1296709 -->
-      <probing privatePath="transferred" />
-    </assemblyBinding>
-  </runtime>
 </configuration>

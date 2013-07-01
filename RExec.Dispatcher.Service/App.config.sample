@@ -5,11 +5,4 @@
     <!-- path to store incoming assemblies in, before loading (relative to ApplicationBasePath) -->
     <add key="Plugin.assembly-storage-dir" value="transferred" />
   </appSettings>
-
-  <!-- settings from Plugin's sample config -->
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <probing privatePath="transferred" />
-    </assemblyBinding>
-  </runtime>
 </configuration>

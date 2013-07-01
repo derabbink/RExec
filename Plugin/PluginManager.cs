@@ -30,8 +30,6 @@ namespace Plugin
 
         private void createAppDomainAndExecutor()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += findAssemblyInStorageDir;
-            
             prepareAppDomainAppBasePath();
             string name = getNewAppDomainName();
             //need to reuse config, in order to get access to THIS assembly and dependencies
@@ -76,35 +74,6 @@ namespace Plugin
         }
 
         /// <summary>
-        /// .net always loads assemblies in all appdomains.
-        /// this method finds an assembly in the storage dir for the default appdomain
-        /// can be skipped by specifying a PrivateBinPath in the App.config
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        /// <returns></returns>
-        private Assembly findAssemblyInStorageDir(object sender, ResolveEventArgs args)
-        {
-            DirectoryInfo dir = new DirectoryInfo(_storageDir);
-            IEnumerable<FileInfo> files = dir.EnumerateFiles();
-            foreach (FileInfo f in files)
-            {
-                if (!assemblyExtensions.Contains(f.Extension.ToLowerInvariant()))
-                    continue;
-
-                AssemblyName name = AssemblyName.GetAssemblyName(f.FullName);
-                if (name.FullName == args.Name || name.Name == args.Name)
-                {
-                    var result = Assembly.LoadFrom(f.FullName);
-                    return result;
-                }
-            }
-            //if nothing found
-            return null;
-        }
-
-
-        /// <summary>
         /// Loads an assembly
         /// </summary>
         /// <param name="assembly"></param>
@@ -124,7 +93,9 @@ namespace Plugin
                 if (!isFileLocked(ex))
                     throw;
             }
-            _executor.LoadAssembly(assemblyFullName);
+            //no explicit load required
+            //load happens implicitly when creating an instance
+            //_executor.LoadAssembly(assemblyFullName);
         }
 
         private void storeAssembly(Stream assembly, string assemblyName)
