@@ -3,5 +3,7 @@
   <appSettings>
     <!-- path to store incoming assemblies in, before loading (relative to ApplicationBasePath) -->
     <add key="Plugin.assembly-storage-dir" value="transferred" />
+    <!-- path to shadow-copy assemblies into, before loading (relative to ApplicationBasePath) -->
+    <add key="Plugin.assembly-cache-dir" value="cached" />
   </appSettings>
 </configuration>

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security.AccessControl;
 using System.Security.Policy;
 using System.Text;
 using DependencyResolver;
@@ -16,26 +17,29 @@ namespace Plugin
     /// </summary>
     public class PluginManager : IDisposable
     {
-        private static readonly IList<string> assemblyExtensions = new List<string>(){".dll", ".exe"};
-
         private AppDomain _appDomain;
         private Executor _executor;
         private string _storageDir;
+        private string _cacheDir;
 
         public PluginManager()
         {
             _storageDir = ConfigurationManager.AppSettings.Get("Plugin.assembly-storage-dir");
+            _cacheDir = ConfigurationManager.AppSettings.Get("Plugin.assembly-cache-dir");
             createAppDomainAndExecutor();
         }
 
         private void createAppDomainAndExecutor()
         {
             prepareAppDomainAppBasePath();
+            prepareAppDomainCachePath();
             string name = getNewAppDomainName();
             //need to reuse config, in order to get access to THIS assembly and dependencies
             //before others can be loaded into reflection context
             Evidence evidence = AppDomain.CurrentDomain.Evidence;
             AppDomainSetup setup = AppDomain.CurrentDomain.SetupInformation;
+            setup.ShadowCopyFiles = "true";
+            setup.CachePath = _cacheDir;
             setup.PrivateBinPath = _storageDir;
             setup.PrivateBinPathProbe = string.Empty; //any non-null string will do
 
@@ -73,13 +77,18 @@ namespace Plugin
                 });
         }
 
+        private void prepareAppDomainCachePath()
+        {
+            if (!Directory.Exists(_cacheDir))
+                Directory.CreateDirectory(_cacheDir);
+        }
+
         /// <summary>
         /// Loads an assembly
         /// </summary>
         /// <param name="assembly"></param>
         /// <param name="assemblyName"></param>
-        /// <param name="assemblyFullName"></param>
-        public void Load(Stream assembly, string assemblyName, string assemblyFullName)
+        public void Load(Stream assembly, string assemblyName)
         {
             //must take detour through storing file on diks, because default appdomain needs
             //to load assembly as well, so keeping it in memory after transfer is not an option
@@ -140,6 +149,20 @@ namespace Plugin
         private void unloadAppDomain()
         {
             AppDomain.Unload(_appDomain);
+            clearAppDomainCacheBasePath();
+        }
+
+        private void clearAppDomainCacheBasePath()
+        {
+            try
+            {
+                Directory.Delete(_cacheDir, true);
+                Directory.CreateDirectory(_cacheDir);
+            }
+            catch (IOException)
+            {
+                //suppress bogus errors about non-empty directory
+            }
         }
 
         public void Dispose()

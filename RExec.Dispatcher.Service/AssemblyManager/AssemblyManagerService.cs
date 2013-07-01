@@ -24,7 +24,7 @@ namespace RExec.Dispatcher.Service.AssemblyManager
         public void AddAssembly(Assembly assembly)
         {
             Console.WriteLine("Receiving assembly to load: {0} ({1})", assembly.FullName, assembly.Name);
-            _pluginManager.Load(assembly.AssemblyStream, assembly.Name, assembly.FullName);
+            _pluginManager.Load(assembly.AssemblyStream, assembly.Name);
         }
 
         public void Clear()

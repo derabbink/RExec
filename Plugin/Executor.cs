@@ -32,10 +32,5 @@ namespace Plugin
             MethodInfo action = t.GetMethod(actionName);
             return action.Invoke(instance, new object[] { });
         }
-
-        internal void LoadAssembly(string assemblyName)
-        {
-            Assembly.Load(assemblyName);
-        }
     }
 }
