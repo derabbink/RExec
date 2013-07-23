@@ -18,7 +18,6 @@ namespace Plugin
     public class PluginManager : IDisposable
     {
         private AppDomain _appDomain;
-        private Executor _executor;
         private string _storageDir;
         private string _cacheDir;
 
@@ -44,7 +43,6 @@ namespace Plugin
             setup.PrivateBinPathProbe = string.Empty; //any non-null string will do
 
             _appDomain = AppDomain.CreateDomain(name, evidence, setup);
-            _executor = Executor.CreateInstanceInAppDomain(_appDomain);
             
         }
 
@@ -141,8 +139,10 @@ namespace Plugin
 
         public object Execute(string assemblyName, string typeName, string actionName)
         {
+            Executor _executor = Executor.CreateInstanceInAppDomain(_appDomain);
             object result = _executor.Execute(assemblyName, typeName, actionName);
             Console.WriteLine();
+            _executor = null; 
             return result;
         }
 
